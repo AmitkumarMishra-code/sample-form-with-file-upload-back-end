@@ -5,12 +5,13 @@ const mongoose = require('mongoose')
 const app = express();
 const cors = require('cors')
 const fs = require("fs");
+const path = require('path');
 
 const multer = require('multer');
 const { addNewUser } = require('./controllers/usersContoller');
 
 app.use(cors())
-app.use(express.static('static'))
+app.use(express.static(__dirname))
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
@@ -30,7 +31,7 @@ mongoose.connect(process.env.MONGODB_ATLAS, {
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'static/uploads/')
+        cb(null, path.join(__dirname, '/uploads/'))
     },
     filename: function(req, file, cb) {
         cb(null, Date.now() + '-' + file.originalname)
