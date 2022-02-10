@@ -9,7 +9,7 @@ const fs = require("fs");
 const multer = require('multer');
 const { addNewUser } = require('./controllers/usersContoller');
 
-app.use(cors({origin: 'https://goofy-yalow-dd1ff4.netlify.app/'}))
+app.use(cors({origin: '*'}))
 app.use(express.static('static'))
 app.use(express.json())
 
